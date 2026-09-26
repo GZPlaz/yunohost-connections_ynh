@@ -1,23 +1,20 @@
 <?php
 header('Content-Type: application/json');
 
-// ==========================================
-// 🔴 UPDATE THESE CREDENTIALS FOR YUNOHOST
-// ==========================================
-$host = '127.0.0.1';
-$db   = 'my_webapp';        // Usually my_webapp by default
-$user = 'my_webapp';        // Usually my_webapp by default
-$pass = 'i3MrjWZDqDqo9p7TVHMGy7szXafHeh'; // Replace with your actual DB password!
+// These placeholders will be replaced by the YunoHost install script
+$host = '__DB_HOST__';
+$db   = '__DB_NAME__';
+$user = '__DB_USER__';
+$pass = '__DB_PWD__';
 
 try {
     $pdo = new PDO("pgsql:host=$host;dbname=$db", $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 } catch (PDOException $e) {
-    die(json_encode(["error" => "Database connection failed. Check your password in api.php!"]));
+    die(json_encode(["error" => "Database connection failed."]));
 }
 
-// This automatically sets up your database schema on the first run!
 $pdo->exec("CREATE TABLE IF NOT EXISTS puzzles (
     id VARCHAR(50) PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -63,7 +60,6 @@ if ($action === 'getAll') {
             $data['history'][] = $puzzle;
         }
     }
-    // Reverse history to show newest completions first
     $data['history'] = array_reverse($data['history']);
     
     echo json_encode($data);
@@ -75,7 +71,7 @@ if ($action === 'save') {
     $id = $input['id'] ?? uniqid();
     $title = $input['title'];
     $groups = json_encode($input['groups']);
-    $status = $input['status']; // 'queue' or 'current'
+    $status = $input['status'];
     
     $stmt = $pdo->prepare("INSERT INTO puzzles (id, title, groups_data, status) VALUES (?, ?, ?, ?) 
                            ON CONFLICT (id) DO UPDATE SET 
@@ -96,10 +92,8 @@ if ($action === 'delete') {
 }
 
 if ($action === 'advance') {
-    // 1. Move the current puzzle to history
     $pdo->exec("UPDATE puzzles SET status = 'history', played_at = CURRENT_TIMESTAMP WHERE status = 'current'");
     
-    // 2. Find the oldest puzzle in the queue and make it current
     $stmt = $pdo->query("SELECT id FROM puzzles WHERE status = 'queue' ORDER BY created_at ASC LIMIT 1");
     $next = $stmt->fetch(PDO::FETCH_ASSOC);
     
