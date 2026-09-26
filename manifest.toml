@@ -5,6 +5,14 @@ name = "Connections Clone"
 description.en = "A custom Connections clone with a built-in admin panel and PostgreSQL backend."
 version = "1.0.0"
 
+[integration]
+yunohost = ">= 11.0"
+architectures = "all"
+multi_instance = true
+ldap = false
+sso = false
+disk = "50M"
+
 [maintainer]
 name = "Admin"
 
