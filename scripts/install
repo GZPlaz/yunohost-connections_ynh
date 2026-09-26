@@ -1,7 +1,5 @@
 #!/bin/bash
 
-STREAMING_CHUNK:Initializing standard YunoHost installation helpers...
-
 source /usr/share/yunohost/helpers
 ynh_abort_if_errors
 
@@ -14,15 +12,11 @@ ynh_print_info --message="Setting up system user and directories..."
 ynh_system_user_create --username=$app
 mkdir -p "$install_dir"
 
-STREAMING_CHUNK:Setting up PostgreSQL database automatically...
-
 ynh_print_info --message="Provisioning PostgreSQL database..."
 ynh_pgsql_setup_db
 
 ynh_print_info --message="Installing PHP dependencies..."
 ynh_install_app_dependencies php-fpm php-pgsql
-
-STREAMING_CHUNK:Copying web assets and injecting database credentials...
 
 ynh_print_info --message="Copying web files..."
 cp -a ../src/* "$install_dir/"
@@ -34,8 +28,6 @@ ynh_replace_string --match_string="DB_USER" --replace_string="$app" --target_fil
 ynh_replace_string --match_string="DB_PWD" --replace_string="$db_pwd" --target_file="$install_dir/api.php"
 
 chown -R $app: "$install_dir"
-
-STREAMING_CHUNK:Finalizing web server configuration and restarting services...
 
 ynh_print_info --message="Configuring PHP-FPM..."
 ynh_php_version_default="8.2"
