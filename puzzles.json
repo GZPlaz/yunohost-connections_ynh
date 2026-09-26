@@ -1,0 +1,25 @@
+{
+  "title": "Custom Connections #1",
+  "groups": [
+    {
+      "category": "TYPES OF APPLES",
+      "level": "yellow",
+      "words": ["GALA", "FUJI", "JAZZ", "HONEYCRISP"]
+    },
+    {
+      "category": "THINGS THAT ARE BLOWN",
+      "level": "green",
+      "words": ["BUBBLE", "GLASS", "WHISTLE", "MIND"]
+    },
+    {
+      "category": "FAST FOOD CHAINS",
+      "level": "blue",
+      "words": ["SONIC", "WENDYS", "ARBY", "CHECKERS"]
+    },
+    {
+      "category": "WORDS ENDING IN NUMBERS",
+      "level": "purple",
+      "words": ["OFTEN", "CANINE", "FREIGHT", "ATONE"]
+    }
+  ]
+}
