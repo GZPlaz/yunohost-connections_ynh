@@ -268,41 +268,6 @@
        }
     */
     
-    function loadData() {
-      const stored = localStorage.getItem('connections_db');
-      if (stored) {
-        appData = JSON.parse(stored);
-      } else {
-        // Initialize with default mock data if completely empty
-        appData = {
-          current: {
-            id: generateId(),
-            title: "Custom Connections #1",
-            groups: [
-              { category: "TYPES OF APPLES", level: "yellow", words: ["GALA", "FUJI", "JAZZ", "HONEYCRISP"] },
-              { category: "THINGS THAT ARE BLOWN", level: "green", words: ["BUBBLE", "GLASS", "WHISTLE", "MIND"] },
-              { category: "FAST FOOD CHAINS", level: "blue", words: ["SONIC", "WENDYS", "ARBY", "CHECKERS"] },
-              { category: "WORDS ENDING IN NUMBERS", level: "purple", words: ["OFTEN", "CANINE", "FREIGHT", "ATONE"] }
-            ]
-          },
-          queue: [],
-          history: []
-        };
-        saveData();
-      }
-      updateUI();
-    }
-
-    function saveData() {
-      // For production: send a POST/PUT request to save state to PostgreSQL
-      localStorage.setItem('connections_db', JSON.stringify(appData));
-      
-      // We also update a specific key for the active puzzle so the main game's script.js could fetch it
-      // if you choose to adapt your main game to read from local storage or an API endpoint.
-      localStorage.setItem('connections_active_puzzle', JSON.stringify(appData.current));
-      
-      updateUI();
-    }
 
     // --- UI Controllers ---
     function updateUI() {
