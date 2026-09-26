@@ -1,0 +1,25 @@
+#!/bin/bash
+
+STREAMING_CHUNK:Initializing cleanup script...
+
+source /usr/share/yunohost/helpers
+ynh_abort_if_errors
+
+app=$YNH_APP_INSTANCE_NAME
+
+ynh_print_info --message="Removing Connections clone..."
+
+STREAMING_CHUNK:Cleaning up database, configs, and web directories...
+
+ynh_pgsql_remove_db
+
+ynh_remove_nginx_config
+
+ynh_php_version_default="8.2"
+ynh_use_php
+ynh_remove_fpm_config
+
+ynh_system_user_delete --username=$app
+rm -rf "/var/www/$app"
+
+ynh_print_info --message="Removal complete."
