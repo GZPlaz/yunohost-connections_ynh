@@ -6,15 +6,26 @@ let remainingWords = [];
 let toastTimeout = null;
 
 async function initGame() {
-  const res = await fetch('puzzles.json');
-  const data = await res.json();
-  document.getElementById('game-title').innerText = data.title;
-  puzzleData = data.groups;
+  try {
+    const res = await fetch('api.php?action=getCurrent');
+    const data = await res.json();
+    
+    if (!data) {
+      document.getElementById('game-title').innerText = "No Active Puzzle";
+      return;
+    }
 
-  remainingWords = puzzleData.flatMap(g => g.words.map(w => ({ word: w, category: g.category, level: g.level })));
-  shuffleArray(remainingWords);
-  renderGrid();
-  updateLives();
+    document.getElementById('game-title').innerText = data.title;
+    puzzleData = data.groups;
+
+    remainingWords = puzzleData.flatMap(g => g.words.map(w => ({ word: w, category: g.category, level: g.level })));
+    shuffleArray(remainingWords);
+    renderGrid();
+    updateLives();
+  } catch (e) {
+    console.error("Failed to load puzzle:", e);
+    document.getElementById('game-title').innerText = "Error Loading Game";
+  }
 }
 
 function renderGrid() {
