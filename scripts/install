@@ -19,8 +19,6 @@ STREAMING_CHUNK:Setting up PostgreSQL database automatically...
 ynh_print_info --message="Provisioning PostgreSQL database..."
 ynh_pgsql_setup_db
 
-Note: ynh_pgsql_setup_db sets the variable $db_pwd automatically
-
 ynh_print_info --message="Installing PHP dependencies..."
 ynh_install_app_dependencies php-fpm php-pgsql
 
