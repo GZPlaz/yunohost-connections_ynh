@@ -1,0 +1,20 @@
+packaging_format = 2
+
+id = "connections_clone"
+name = "Connections Clone"
+description.en = "A custom Connections clone with a built-in admin panel and PostgreSQL backend."
+version = "1.0.0"
+
+[maintainer]
+name = "Admin"
+
+[dependencies]
+system = "php-pgsql"
+
+[install]
+[install.domain]
+type = "domain"
+
+[install.path]
+type = "path"
+default = "/connections"
