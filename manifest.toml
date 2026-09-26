@@ -3,7 +3,16 @@ packaging_format = 2
 id = "connections_clone"
 name = "Connections Clone"
 description.en = "A custom Connections clone with a built-in admin panel and PostgreSQL backend."
-version = "1.0.0"
+version = "1.0.0~ynh1"
+maintainers = ["Admin"]
+
+STREAMING_CHUNK:Adding upstream metadata required by YunoHost validation...
+
+[upstream]
+license = "free"
+code = "https://github.com/GZPlaz/yunohost-connections_ynh"
+
+STREAMING_CHUNK:Adding required integration parameters including hardware limits...
 
 [integration]
 yunohost = ">= 11.0"
@@ -13,15 +22,11 @@ ldap = false
 sso = false
 disk = "50M"
 
+STREAMING_CHUNK:Adding specific RAM dictionary requirements...
+
 [integration.ram]
 build = "50M"
-run = "50M"
-
-[maintainer]
-name = "Admin"
-
-[dependencies]
-system = "php-pgsql"
+runtime = "50M"
 
 [install]
 [install.domain]
