@@ -29,3 +29,15 @@ type = "domain"
 [install.path]
 type = "path"
 default = "/connections"
+
+[resources]
+[resources.system_user]
+
+[resources.install_dir]
+dir = "/var/www/connections_clone"
+
+[resources.database]
+type = "postgresql"
+
+[resources.apt]
+packages = "php-fpm, php-pgsql, postgresql, postgresql-contrib"
