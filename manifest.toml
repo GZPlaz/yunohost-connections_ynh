@@ -6,13 +6,9 @@ description.en = "A custom Connections clone with a built-in admin panel and Pos
 version = "1.0.0~ynh1"
 maintainers = ["Admin"]
 
-STREAMING_CHUNK:Adding upstream metadata required by YunoHost validation...
-
 [upstream]
 license = "free"
 code = "https://github.com/GZPlaz/yunohost-connections_ynh"
-
-STREAMING_CHUNK:Adding required integration parameters including hardware limits...
 
 [integration]
 yunohost = ">= 11.0"
@@ -21,8 +17,6 @@ multi_instance = true
 ldap = false
 sso = false
 disk = "50M"
-
-STREAMING_CHUNK:Adding specific RAM dictionary requirements...
 
 [integration.ram]
 build = "50M"
