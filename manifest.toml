@@ -12,7 +12,10 @@ multi_instance = true
 ldap = false
 sso = false
 disk = "50M"
-ram = "50M"
+
+[integration.ram]
+build = "50M"
+run = "50M"
 
 [maintainer]
 name = "Admin"
